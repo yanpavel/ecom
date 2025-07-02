@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/yanpavel/api_sandbox/service/products"
 	"github.com/yanpavel/api_sandbox/service/user"
 )
 
@@ -24,6 +25,10 @@ func NewAPIServer(addr string, db *sql.DB) *APIServer {
 func (s *APIServer) Run() error {
 	router := mux.NewRouter()
 	subrouter := router.PathPrefix("/api/v1").Subrouter()
+
+	productStore := products.NewStore(s.db)
+	productHandler := products.NewHandler(productStore)
+	productHandler.RegisterRoutes(subrouter)
 
 	userStore := user.NewStore(s.db)
 	userHandler := user.NewHandler(userStore)

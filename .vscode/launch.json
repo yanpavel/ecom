@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch API",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "C:\\Users\\user\\source\\repos\\api_sandbox\\cmd", // или "program": "${workspaceFolder}/cmd/api" если ваш main.go в поддиректории
+            "env": {
+                // Здесь можно указать переменные окружения, например для подключения к БД
+                "DB_USER": "root",
+                "DB_PASSWORD": "root",
+                "DB_ADDRESS": "localhost:3306",
+                "DB_NAME": "ecom"
+            },
+            "args": [] // Аргументы командной строки, если нужны (например, "up" или "down" для миграций)
+        }
+    ]
+}
