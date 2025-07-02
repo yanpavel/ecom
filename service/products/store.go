@@ -2,6 +2,7 @@ package products
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/yanpavel/api_sandbox/types"
 )
@@ -12,6 +13,16 @@ type Store struct {
 
 func NewStore(db *sql.DB) *Store {
 	return &Store{db: db}
+}
+
+func (s *Store) CreateProducts(p *types.Product) error {
+	_, err := s.db.Exec("INSERT INTO products (name, description, image, price, quantity, createdAt) VALUES (?, ?, ?, ?, ?, ?)",
+		p.Name, p.Description, p.Image, p.Price, p.Quantity, p.CreatedAt)
+
+	if err != nil {
+		return fmt.Errorf("Product isn't created : %v", err)
+	}
+	return nil
 }
 
 func (s *Store) GetProducts() ([]*types.Product, error) {
