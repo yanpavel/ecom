@@ -6,6 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/yanpavel/api_sandbox/service/cart"
+	"github.com/yanpavel/api_sandbox/service/order"
 	"github.com/yanpavel/api_sandbox/service/products"
 	"github.com/yanpavel/api_sandbox/service/user"
 )
@@ -33,6 +35,10 @@ func (s *APIServer) Run() error {
 	userStore := user.NewStore(s.db)
 	userHandler := user.NewHandler(userStore)
 	userHandler.RegisterRoutes(subrouter)
+
+	orderStore := order.NewStore(s.db)
+	cartHandler := cart.NewHandler(orderStore, productStore, userStore)
+	cartHandler.RegisterRoutes(subrouter)
 
 	log.Println("Listening on", s.addr)
 
