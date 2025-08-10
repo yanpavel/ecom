@@ -35,7 +35,7 @@ This is a learning pet-project developed to practice building REST APIs with Go,
 ```bash
 git clone https://github.com/yanpavel/ecom.git
 cd ecom
-
+```
 ---
 
 ##  Project Structure
@@ -84,9 +84,12 @@ curl -X POST http://localhost:8080/api/v1/register \
         "username": "john",
         "password": "123456"
       }'
+```
 
 ### 📦  Get product list
+```bash
   curl -X GET http://localhost:8080//api/v1/products \
+```
 
 ---
 
